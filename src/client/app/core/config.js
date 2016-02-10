@@ -32,10 +32,17 @@
 
         $authProvider.oauth2({
             name: 'fos',
-            url: '/auth/fos',
-            clientId: '2_33b8wmu4cqo00k88g4co4w44s80ocsc88gw88okc8wckk8kc8s',
+            url: 'http://oauth-example.dev/app_dev.php/auth/fos',
+            clientId: '1_3sac9uppx0o4sgks80o40w0kssc4cco8swc044040cks4wccc0',
             redirectUri: window.location.origin,
-            authorizationEndpoint: 'http://oauth-example.dev:8080/web/app_dev.php/oauth/v2/auth',
+            authorizationEndpoint: 'http://oauth-example.dev/app_dev.php/oauth/v2/auth',
+            defaultUrlParams: ['response_type', 'client_id', 'redirect_uri'],
+            responseType: 'code',
+            responseParams: {
+                code: 'code',
+                clientId: 'clientId',
+                redirectUri: 'redirectUri'
+            }
         });
     }
 

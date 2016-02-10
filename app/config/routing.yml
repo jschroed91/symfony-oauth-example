@@ -16,3 +16,6 @@ satellizer_auth_provider:
     path: /auth/fos
     defaults:
         _controller: AppBundle:Auth:provider
+
+api_login_check:
+    path: /api/login_check

@@ -6,6 +6,7 @@ use OAuth2\OAuth2;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
@@ -22,6 +23,8 @@ class AuthController extends Controller
     {
         $repo = $this->getDoctrine()->getRepository('AppBundle:Client');
         $data = json_decode($request->getContent(), true);
+
+        dump('testing');
 
         $client = $repo->find($data['clientId']);
 
@@ -48,8 +51,8 @@ class AuthController extends Controller
             'exp' => time() + (2 * 7 * 24 * 60 * 60)
         );
 
-        $key = $this->container->getParameter('kernel.secret');
+        $jwtEncoder = $this->container->get('lexik_jwt_authentication.jwt_encoder');
 
-        return JsonResponse::create(array('token' => \JWT::encode($payload, $key)));
+        return JsonResponse::create(array('token' => $jwtEncoder->encode($payload)));
     }
 }
