@@ -44,15 +44,8 @@ class AuthController extends Controller
         $data = json_decode($subresponse->getContent(), true);
         $authCode = $repo->findOneByToken($data['access_token']);
 
-        $payload = array(
-            'iss' => $request->getBaseUrl(),
-            'sub' => $authCode->getUser()->getId(),
-            'iat' => time(),
-            'exp' => time() + (2 * 7 * 24 * 60 * 60)
-        );
+        $jwtManager = $this->get('lexik_jwt_authentication.jwt_manager');
 
-        $jwtEncoder = $this->container->get('lexik_jwt_authentication.jwt_encoder');
-
-        return JsonResponse::create(array('token' => $jwtEncoder->encode($payload)));
+        return JsonResponse::create(array('token' => $jwtManager->create($authCode->getUser())));
     }
 }

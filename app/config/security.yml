@@ -37,7 +37,8 @@ security:
         api:
             pattern:   ^/api
             stateless: true
-            lexik_jwt: ~
+            lexik_jwt:
+                throw_exceptions: true
 
     access_control:
         - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
