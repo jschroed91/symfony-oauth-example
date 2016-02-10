@@ -47,8 +47,6 @@ class DefaultController extends Controller
     {
         $user = $this->getUser();
 
-        dump($user);
-
-        return JsonResponse::create(array('success' => true, 'user' => $user));
+        return JsonResponse::create(array('success' => true, 'user' => array('id' => $user->getId(), 'username' => $user->getUsername())));
     }
 }
