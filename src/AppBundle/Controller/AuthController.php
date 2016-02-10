@@ -24,8 +24,6 @@ class AuthController extends Controller
         $repo = $this->getDoctrine()->getRepository('AppBundle:Client');
         $data = json_decode($request->getContent(), true);
 
-        dump('testing');
-
         $client = $repo->find($data['clientId']);
 
         $params = array(

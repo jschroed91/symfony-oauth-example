@@ -45,6 +45,10 @@ class DefaultController extends Controller
      */
     public function testApiAction(Request $request)
     {
-        return JsonResponse::create(array('success' => true));
+        $user = $this->getUser();
+
+        dump($user);
+
+        return JsonResponse::create(array('success' => true, 'user' => $user));
     }
 }

@@ -31,6 +31,7 @@
             if (isAuthenticated()) {
                 vm.authenticated = true;
                 vm.payload = getPayload();
+                console.log(vm.payload);
             }
 
             var promises = [getMessageCount(), getPeople()];
@@ -76,7 +77,7 @@
 
         function makeApiCall() {
             return $http({
-                url: 'http://oauth-example.dev/app_dev.php/api/test',
+                url: 'http://oauth-example.dev:8080/web/app_dev.php/api/test',
                 method: 'GET'
             })
                 .then(success)
